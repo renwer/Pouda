@@ -5,8 +5,10 @@ import com.renwer.networkElements.ConnectionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Server implements ConnectionListener {
+
 
     public static void main(String[] args) {
         new Server();
@@ -17,7 +19,7 @@ public class Server implements ConnectionListener {
 
     private Server() {
         System.out.println("Server up and running");
-        try(ServerSocket serverSocket = new ServerSocket(8189)) {
+        try (ServerSocket serverSocket = new ServerSocket(8189)) {
             while (true) {
                 try {
                     new Connection(this, serverSocket.accept());
@@ -26,7 +28,7 @@ public class Server implements ConnectionListener {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -50,8 +52,10 @@ public class Server implements ConnectionListener {
 
     @Override
     public synchronized void onException(Connection connection, Exception e) {
+        connection.abortConnection();
         System.out.println("Exception caught " + e);
     }
+
 
     private void sendToAllConnections(String message) {
         System.out.println(message);
