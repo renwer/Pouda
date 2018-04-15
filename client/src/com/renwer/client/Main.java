@@ -1,4 +1,4 @@
-package com.renwer.strixMain;
+package com.renwer.client;
 
 import javafx.application.Application;
 

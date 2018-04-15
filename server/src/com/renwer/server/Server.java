@@ -5,7 +5,6 @@ import com.renwer.networkElements.ConnectionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Server implements ConnectionListener {
 
@@ -28,7 +27,7 @@ public class Server implements ConnectionListener {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -57,7 +56,7 @@ public class Server implements ConnectionListener {
     }
 
 
-    private void sendToAllConnections(String message) {
+    private synchronized void sendToAllConnections(String message) {
         System.out.println(message);
 
         for (int i = 0; i < connections.size(); i++) {

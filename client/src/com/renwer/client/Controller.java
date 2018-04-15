@@ -1,4 +1,4 @@
-package com.renwer.strixMain;
+package com.renwer.client;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,6 +10,10 @@ import javafx.scene.layout.VBox;
 
 
 public class Controller {
+
+    public static final String IP_ADDRESS = "127.0.0.1";
+    public static final int PORT = 8189;
+    
 
 
     @FXML
@@ -38,10 +42,6 @@ public class Controller {
         }
         messages.heightProperty().addListener(observable -> messagePane.setVvalue(1D));
         messageField.requestFocus();
-    }
-
-    public void onUserLogin(String username) {
-
     }
 
 
