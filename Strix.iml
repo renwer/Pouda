@@ -8,7 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="client" />
-    <orderEntry type="module" module-name="networkElements" />
+    <orderEntry type="module" module-name="networkelements" />
     <orderEntry type="module" module-name="server" />
   </component>
 </module>
