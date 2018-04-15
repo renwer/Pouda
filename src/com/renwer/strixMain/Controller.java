@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 
@@ -20,6 +22,12 @@ public class Controller {
     private ScrollPane messagePane;
 
 
+    @FXML
+    private void handleEnterButtonPressed(KeyEvent ke){
+        if(ke.getCode() == KeyCode.ENTER){
+            onSendButtonClicked();
+        }
+    }
 
     public void onSendButtonClicked() {
         if (!messageField.getText().equals("")) {
