@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.ScrollPane?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.renwer.strixMain.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.renwer.strixMain.Controller" onKeyPressed="#handleEnterButtonPressed">
    <children>
       <Pane layoutX="200.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #1d232a; -fx-focus-color: #1d232a;">
             <ScrollPane fx:id="messagePane" hbarPolicy="NEVER" prefHeight="532.0" prefWidth="800.0" maxHeight="550">
