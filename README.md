@@ -1,9 +1,9 @@
 Strix is a minimalistic, anonymous, cross-platform chat room with an (upcoming) elegant user interface.
 It is designated to be primarily a learning project and now it's on an early development stage;
-nevertheless, it can be really fun when deployed and enhanced with enough features.
+Nevertheless, it can be really fun when deployed and enhanced with enough features.
 
 
-If you are willing to contribute to this project - feel free to do so within the list of issues provided or add your own issue.
+If you are willing to contribute to this project - feel free to do so within the list of issues provided or add your own issue
 to suggest fixes, features or improvements.
 First-timers with necessary skills and responsibilities are welcome and any help is appreciated!
 
