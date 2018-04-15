@@ -24,7 +24,7 @@ public class Controller {
     public void onSendButtonClicked() {
         if (!messageField.getText().equals("")) {
             Label message = new Label(messageField.getText());
-            message.setStyle("-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px;");
+            message.setStyle("-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px; -fx-font-size: 15px; -fx-background-radius: 8px");
             messageField.setText("");
             messages.getChildren().add(message);
         }

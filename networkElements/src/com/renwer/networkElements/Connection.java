@@ -1,5 +1,7 @@
 package com.renwer.networkElements;
 
+import com.renwer.strixMain.Controller;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -12,6 +14,7 @@ public class Connection {
 
     private final BufferedReader input;
     private final BufferedWriter output;
+    private Controller controller = new Controller();
 
 
     public Connection(ConnectionListener listener, String ipAddress, int port) throws IOException {
@@ -25,7 +28,6 @@ public class Connection {
         this.output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), Charset.forName("UTF-8")));
         this.receivingThread = new Thread(new ListenerThread());
         receivingThread.run();
-
     }
 
     class ListenerThread implements Runnable {
@@ -65,7 +67,11 @@ public class Connection {
         }
     }
 
-        @Override
+    public Controller getController() {
+        return controller;
+    }
+
+    @Override
         public String toString () {
             return "Connection: " + socket.getInetAddress() + ": " + socket.getPort();
         }

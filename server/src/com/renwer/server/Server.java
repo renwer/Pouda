@@ -14,7 +14,7 @@ public class Server implements ConnectionListener {
         new Server();
     }
 
-    private final ArrayList<Connection> connections = new ArrayList<>();
+    private ArrayList<Connection> connections = new ArrayList<>();
 
 
     private Server() {

@@ -17,10 +17,6 @@
                   <AnchorPane maxHeight="532">
                      <VBox fx:id="messages" prefHeight="531.0" maxHeight="531.0" prefWidth="800.0" style="-fx-background-color: #2c4359;">
                         <children>
-                           <Label  prefHeight="33.0" wrapText="true" style="-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px;" text="I assume it is not useful without a running application anyway" />
-                           <Label  prefHeight="33.0" wrapText="true" style="-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px;" text="I will try to figure out how this GUI controller is supposed to work though" />
-                           <Label  prefHeight="33.0" wrapText="true" style="-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px;" text="and also find some better colors and stuff" />
-                           <Label  prefHeight="33.0" wrapText="true" style="-fx-background-color: #d7f9c5; -fx-padding: 10px; -fx-background-insets: 5px;" text="True" />
                         </children>
                      </VBox>
                   </AnchorPane>
