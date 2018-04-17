@@ -44,7 +44,6 @@ public class Connection {
         //this.output = new DataOutputStream(socket.getOutputStream());
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream(), Charset.forName("UTF-8")));
         this.output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), Charset.forName("UTF-8")));
-
         this.thread = new Thread(new ConnectionThread());
         thread.start();
     }
@@ -61,6 +60,7 @@ public class Connection {
                     listener.onStringReceived(Connection.this, input.readLine());
                 }
             } catch (IOException e) {
+                e.printStackTrace();
                 listener.onException(Connection.this, e);
             } finally {
                 listener.onAbortConnection(Connection.this);
