@@ -2,6 +2,7 @@ package com.renwer.client;
 
 import com.renwer.networkelements.Connection;
 import com.renwer.networkelements.ConnectionListener;
+import com.renwer.server.Server;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,7 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class Controller implements ConnectionListener{
+public class Controller implements ConnectionListener {
 
     public static final String IP_ADDRESS = "127.0.0.1";
     public static final int PORT = 8189;
@@ -31,20 +32,30 @@ public class Controller implements ConnectionListener{
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         try {
             this.connection = new Connection(this, IP_ADDRESS, PORT);
         }catch(IOException e){
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
     public void onConnectionReady(Connection connection) {
         addMessageToChat("Connected");
-    }
+        //Server.connections.add(connection);
+
+        for (Connection c : Server.connections) {
+            Label temp = new Label();
+            temp.setText(c.toString());
+            temp.setStyle("-fx-padding: 5;");
+            temp.setPrefWidth(170.0);
+            temp.setPrefHeight(25.0);
+            activeUsers.getChildren().add(temp);
+            }
+        }
+
 
     @Override
     public void onStringReceived(Connection connection, String string) {

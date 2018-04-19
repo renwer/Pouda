@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Strix" />
+    <orderEntry type="module" module-name="Pouda" />
+    <orderEntry type="module" module-name="server" />
   </component>
 </module>

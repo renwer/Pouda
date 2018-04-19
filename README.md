@@ -1,4 +1,4 @@
-Strix is a minimalistic, anonymous, cross-platform chat room with an (upcoming) elegant user interface.
+Pouda is a minimalistic, anonymous, cross-platform chat room with an (upcoming) elegant user interface.
 It is designated to be primarily a learning project and now it's on an early development stage;
 Nevertheless, it can be really fun when deployed and enhanced with enough features.
 

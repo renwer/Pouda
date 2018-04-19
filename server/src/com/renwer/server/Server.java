@@ -13,11 +13,10 @@ public class Server implements ConnectionListener {
     }
 
     /** All connections */
-    private ArrayList<Connection> connections;
+    public static ArrayList<Connection> connections = new ArrayList<>();
 
     private Server() {
         System.out.println("Server up and running");
-        connections = new ArrayList<>();
 
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             while (true) {

@@ -1,5 +1,7 @@
 package com.renwer.networkelements;
 
+import com.renwer.server.Server;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -54,7 +56,6 @@ public class Connection {
         public void run() {
             try {
                 listener.onConnectionReady(Connection.this);
-
                 while (!thread.isInterrupted()) {
                     //listener.onStringReceived(Connection.this, input.readUTF());
                     listener.onStringReceived(Connection.this, input.readLine());
