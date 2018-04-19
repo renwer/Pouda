@@ -40,13 +40,6 @@
       <VBox fx:id="activeUsers" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #88a5ad; -fx-focus-color: #88a5ad;">
          <children>
             <TextField prefHeight="30.0" prefWidth="200.0" />
-
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="ActiveUser2" />
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="ActiveUser1" />
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="ActiveUser3" />
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="ActiveUser5" />
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="ActiveUser6" />
-            <Label prefHeight="25.0" prefWidth="170.0" style="-fx-padding: 5;" text="And so on" />
          </children>
       </VBox>
          </content>

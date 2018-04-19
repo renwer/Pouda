@@ -5,6 +5,7 @@ import com.renwer.networkelements.ConnectionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Server implements ConnectionListener {
 
@@ -49,6 +50,13 @@ public class Server implements ConnectionListener {
 
             connection.setUserName(userName);
             connection.sendString("TYPE:REGISTER USERNAME:" + userName);
+
+            StringJoiner allUsersStringJoiner = new StringJoiner(",");
+            for(Connection c : connections){
+                allUsersStringJoiner.add(c.getUserName());
+            }
+            connection.sendString("TYPE:USER_LIST USERS:" + allUsersStringJoiner.toString());
+
             sendToAllConnections(userName + " joined the chat room");
         }else {
             sendToAllConnections(connection.getUserName() + ": " + string);

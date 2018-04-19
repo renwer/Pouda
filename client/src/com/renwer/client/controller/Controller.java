@@ -89,7 +89,12 @@ public class Controller implements ConnectionListener{
 
             connection.setUserName(userName);
             addMessageToChat("Connected as " + userName);
-        }else {
+        }else if(string.startsWith("TYPE:USER_LIST")){
+            String userNameList = string.substring(string.indexOf(':', string.indexOf("USERS:")) + 1);
+            System.out.println(userNameList);
+            String[] userNameListArray = userNameList.split(",");
+            fillUserList(userNameListArray);
+        }else{
             addMessageToChat(string);
         }
     }
@@ -132,7 +137,14 @@ public class Controller implements ConnectionListener{
             messages.heightProperty().addListener(observable -> messagePane.setVvalue(1D));
             messageField.requestFocus();
         }
+    }
 
+    private void fillUserList(String[] userNameList){
+        for(String s : userNameList){
+            Label userLabel = new Label(s);
+            userLabel.setStyle("-fx-padding: 5px");
+            activeUsers.getChildren().add(userLabel);
+        }
     }
 
 }
