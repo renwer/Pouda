@@ -1,15 +1,21 @@
-package com.renwer.client;
+package com.renwer.client.controller;
 
+import com.renwer.client.Main;
 import com.renwer.networkelements.Connection;
 import com.renwer.networkelements.ConnectionListener;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -30,15 +36,38 @@ public class Controller implements ConnectionListener{
     private ScrollPane messagePane;
 
 
-    @FXML
-    private void initialize(){
+    public Controller(){
+
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/LoginForm.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Sign In");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(pane);
+            dialogStage.setScene(scene);
+
+            LoginFormController controller = loader.getController();
+
+            dialogStage.showAndWait();
+        }catch(IOException e){
+
+        }
+
         try {
             this.connection = new Connection(this, IP_ADDRESS, PORT);
         }catch(IOException e){
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
 
+    @FXML
+    private void initialize(){
+        connection.init();
     }
 
     @Override
