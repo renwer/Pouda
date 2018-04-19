@@ -13,7 +13,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label alignment="CENTER" text="Enter your name:" />
+                  <Label alignment="CENTER" text="Enter your userName:" />
                   <TextField fx:id="userNameTextField" alignment="CENTER" prefHeight="25.0" prefWidth="200.0" />
                </children>
                <opaqueInsets>

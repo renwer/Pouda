@@ -21,8 +21,9 @@ import java.io.IOException;
 
 public class Controller implements ConnectionListener{
 
-    public static final String IP_ADDRESS = "127.0.0.1";
-    public static final int PORT = 8189;
+    private static final String IP_ADDRESS = "127.0.0.1";
+    private static final int PORT = 8189;
+    private static final String DEFAULT_NAME = "Anonymous";
     
     private Connection connection;
 
@@ -59,7 +60,7 @@ public class Controller implements ConnectionListener{
                 String userName = controller.getUserName();
                 this.connection = new Connection(this, IP_ADDRESS, PORT, userName);
             }else if(command == PressedButton.ANONYMOUS){
-                this.connection = new Connection(this, IP_ADDRESS, PORT);
+                this.connection = new Connection(this, IP_ADDRESS, PORT, DEFAULT_NAME);
             }
         }catch(IOException e){
             e.printStackTrace();
@@ -74,13 +75,23 @@ public class Controller implements ConnectionListener{
 
     @Override
     public void onConnectionReady(Connection connection) {
+        connection.sendString("TYPE:REGISTER USERNAME:" + connection.getUserName());
+
+
         addMessageToChat("Connected");
     }
 
     @Override
     public void onStringReceived(Connection connection, String string) {
         System.out.println("Received message: " + string);
-        addMessageToChat(string);
+        if(string.startsWith("TYPE:REGISTER")){
+            String userName = string.substring(string.indexOf(':', string.indexOf("USERNAME:")) + 1);
+
+            connection.setUserName(userName);
+            addMessageToChat("Connected as " + userName);
+        }else {
+            addMessageToChat(string);
+        }
     }
 
     @Override

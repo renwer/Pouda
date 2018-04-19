@@ -20,7 +20,7 @@ public class Connection {
     /** Interface to listen for events */
     private final ConnectionListener listener;
 
-    private String name;
+    private String userName;
 
     /**
      * Creates connection by IP address and port
@@ -49,14 +49,14 @@ public class Connection {
         this.thread = new Thread(new ConnectionThread());
     }
 
-    public Connection(ConnectionListener listener, Socket socket, String name) throws IOException{
+    public Connection(ConnectionListener listener, Socket socket, String userName) throws IOException{
         this(listener, socket);
-        this.name = name;
+        this.userName = userName;
     }
 
-    public Connection(ConnectionListener listener, String ipAddress, int port, String name) throws IOException{
+    public Connection(ConnectionListener listener, String ipAddress, int port, String userName) throws IOException{
         this(listener, ipAddress, port);
-        this.name = name;
+        this.userName = userName;
     }
 
     public void init(){
@@ -110,8 +110,12 @@ public class Connection {
         }
     }
 
-    public String getName(){
-        return name;
+    public String getUserName(){
+        return userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     /**
@@ -120,6 +124,6 @@ public class Connection {
      */
     @Override
     public String toString () {
-        return "Name: " + name + "; address: " + socket.getInetAddress() + ": " + socket.getPort();
+        return "Name: " + userName + "; address: " + socket.getInetAddress() + ": " + socket.getPort();
     }
 }

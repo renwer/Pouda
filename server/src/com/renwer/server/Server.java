@@ -36,18 +36,29 @@ public class Server implements ConnectionListener {
     @Override
     public synchronized void onConnectionReady(Connection connection) {
         connections.add(connection);
-        sendToAllConnections(connection + " joined the chat room");
     }
 
     @Override
     public synchronized void onStringReceived(Connection connection, String string) {
-        sendToAllConnections(string);
+        if(string.startsWith("TYPE:REGISTER")){
+            String userName = string.substring(string.indexOf(':', string.indexOf("USERNAME:")) + 1);
+
+            if (!isUniqueUserName(userName)) {
+                userName = generateUniqueUserName(userName);
+            }
+
+            connection.setUserName(userName);
+            connection.sendString("TYPE:REGISTER USERNAME:" + userName);
+            sendToAllConnections(userName + " joined the chat room");
+        }else {
+            sendToAllConnections(connection.getUserName() + ": " + string);
+        }
     }
 
     @Override
     public synchronized void onAbortConnection(Connection connection) {
         connections.remove(connection);
-        sendToAllConnections(connection + " has left");
+        sendToAllConnections(connection.getUserName() + " has left");
     }
 
     @Override
@@ -61,5 +72,21 @@ public class Server implements ConnectionListener {
         for (Connection i : connections) {
             i.sendString(message);
         }
+    }
+
+    private boolean isUniqueUserName(String userName){
+        for(Connection c : connections){
+            if(userName.equals(c.getUserName())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String generateUniqueUserName(String userName){
+        while(!isUniqueUserName(userName)){
+            userName += (int)(Math.random() * 100);
+        }
+        return userName;
     }
 }
