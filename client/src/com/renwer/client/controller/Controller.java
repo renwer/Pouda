@@ -37,7 +37,6 @@ public class Controller implements ConnectionListener{
 
 
     public Controller(){
-
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/LoginForm.fxml"));
@@ -51,14 +50,17 @@ public class Controller implements ConnectionListener{
             dialogStage.setScene(scene);
 
             LoginFormController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
 
             dialogStage.showAndWait();
-        }catch(IOException e){
+            PressedButton command = controller.getCommand();
 
-        }
-
-        try {
-            this.connection = new Connection(this, IP_ADDRESS, PORT);
+            if(command == PressedButton.OK){
+                String userName = controller.getUserName();
+                this.connection = new Connection(this, IP_ADDRESS, PORT, userName);
+            }else if(command == PressedButton.ANONYMOUS){
+                this.connection = new Connection(this, IP_ADDRESS, PORT);
+            }
         }catch(IOException e){
             e.printStackTrace();
             throw new RuntimeException(e);
