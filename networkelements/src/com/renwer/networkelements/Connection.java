@@ -22,6 +22,8 @@ public class Connection {
     /** Interface to listen for events */
     private final ConnectionListener listener;
 
+    private String userName;
+
     /**
      * Creates connection by IP address and port
      * @param listener
@@ -47,6 +49,19 @@ public class Connection {
         this.input = new BufferedReader(new InputStreamReader(socket.getInputStream(), Charset.forName("UTF-8")));
         this.output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), Charset.forName("UTF-8")));
         this.thread = new Thread(new ConnectionThread());
+    }
+
+    public Connection(ConnectionListener listener, Socket socket, String userName) throws IOException{
+        this(listener, socket);
+        this.userName = userName;
+    }
+
+    public Connection(ConnectionListener listener, String ipAddress, int port, String userName) throws IOException{
+        this(listener, ipAddress, port);
+        this.userName = userName;
+    }
+
+    public void init(){
         thread.start();
     }
 
@@ -96,12 +111,20 @@ public class Connection {
         }
     }
 
+    public String getUserName(){
+        return userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
     /**
      * Puts connection data to string
      * @return
      */
     @Override
     public String toString () {
-        return "Connection: " + socket.getInetAddress() + ": " + socket.getPort();
+        return "Name: " + userName + "; address: " + socket.getInetAddress() + ": " + socket.getPort();
     }
 }
