@@ -78,16 +78,6 @@ public class Controller implements ConnectionListener {
     public void onConnectionReady(Connection connection) {
         connection.sendString("TYPE:REGISTER USERNAME:" + connection.getUserName());
         addMessageToChat("Connected");
-        //Server.connections.add(connection);
-
-        for (Connection c : Server.connections) {
-            Label temp = new Label();
-            temp.setText(c.toString());
-            temp.setStyle("-fx-padding: 5;");
-            temp.setPrefWidth(170.0);
-            temp.setPrefHeight(25.0);
-            activeUsers.getChildren().add(temp);
-        }
     }
 
     @Override
