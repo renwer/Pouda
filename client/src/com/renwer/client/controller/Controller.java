@@ -144,7 +144,10 @@ public class Controller implements ConnectionListener {
             );
 
             messages.heightProperty().addListener(observable -> messagePane.setVvalue(1D));
-            messageField.requestFocus();
+
+            Platform.runLater(()->
+                messageField.requestFocus()
+            );
         }
     }
 
