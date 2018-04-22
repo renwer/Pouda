@@ -152,15 +152,15 @@ public class Controller implements ConnectionListener {
     }
 
     private void fillUserList(String[] userNameList) {
-        Platform.runLater(()->
-                activeUsers.getChildren().clear()
+        Platform.runLater(() -> {
+                    activeUsers.getChildren().clear();
+
+                    for (String s : userNameList) {
+                        Label userLabel = new Label(s);
+                        userLabel.setStyle("-fx-padding: 5px");
+                        activeUsers.getChildren().add(userLabel);
+                    }
+                }
         );
-        for(String s : userNameList) {
-            Label userLabel = new Label(s);
-            userLabel.setStyle("-fx-padding: 5px");
-            Platform.runLater(()->
-                    activeUsers.getChildren().add(userLabel)
-            );
-        }
     }
 }
