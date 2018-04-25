@@ -54,8 +54,8 @@ public class Server implements ConnectionListener {
             for(Connection c : connections){
                 allUsersStringJoiner.add(c.getUserName());
             }
-            connection.sendString("TYPE:USER_LIST USERS:" + allUsersStringJoiner.toString());
 
+            sendToAllConnections("TYPE:USER_LIST USERS:" + allUsersStringJoiner.toString());
             sendToAllConnections(userName + " joined the chat room");
         }else {
             sendToAllConnections(connection.getUserName() + ": " + string);

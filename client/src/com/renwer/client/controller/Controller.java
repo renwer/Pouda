@@ -144,15 +144,23 @@ public class Controller implements ConnectionListener {
             );
 
             messages.heightProperty().addListener(observable -> messagePane.setVvalue(1D));
-            messageField.requestFocus();
+
+            Platform.runLater(()->
+                messageField.requestFocus()
+            );
         }
     }
 
     private void fillUserList(String[] userNameList) {
+        Platform.runLater(()->
+                activeUsers.getChildren().clear()
+        );
         for(String s : userNameList) {
             Label userLabel = new Label(s);
             userLabel.setStyle("-fx-padding: 5px");
-            activeUsers.getChildren().add(userLabel);
+            Platform.runLater(()->
+                    activeUsers.getChildren().add(userLabel)
+            );
         }
     }
 }
