@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,41 +11,65 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.control.ScrollPane?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.renwer.client.controller.Controller" onKeyPressed="#handleEnterButtonPressed">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleEnterButtonPressed" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.renwer.client.controller.Controller">
    <children>
+      <MenuBar prefHeight="25.0" prefWidth="345.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#createNewConnection" text="New Connection" />
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
       <Pane layoutX="200.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #1d232a; -fx-focus-color: #1d232a;">
-            <ScrollPane fx:id="messagePane" hbarPolicy="NEVER" prefHeight="532.0" prefWidth="800.0" maxHeight="550">
-               <content>
-                  <AnchorPane maxHeight="532">
-                     <VBox fx:id="messages" prefHeight="531.0" maxHeight="531.0" prefWidth="800.0" style="-fx-background-color: #2c4359;">
+         <children>
+               <ScrollPane fx:id="messagePane" hbarPolicy="NEVER" maxHeight="550" prefHeight="532.0" prefWidth="800.0">
+                  <content>
+                     <AnchorPane maxHeight="532" prefHeight="530.0" prefWidth="800.0">
                         <children>
+                            <TabPane fx:id="chatsTabPane" prefHeight="209.0" prefWidth="475.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <tabs>
+                                </tabs>
+                            </TabPane>
                         </children>
-                     </VBox>
-                  </AnchorPane>
-               </content>
-         </ScrollPane>
-            <TextField fx:id="messageField" layoutX="14.0" layoutY="547.0" prefHeight="33.0" prefWidth="689.0">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="14.0" />
-               </font>
-            </TextField>
-            <Button layoutX="723.0" layoutY="547.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="63.0" text="Send" onAction="#onSendButtonClicked">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+                     </AnchorPane>
+                  </content>
+                </ScrollPane>
+               <TextField fx:id="messageField" layoutX="14.0" layoutY="547.0" prefHeight="33.0" prefWidth="689.0">
+                  <font>
+                     <Font name="Bookshelf Symbol 7" size="14.0" />
+                  </font>
+               </TextField>
+               <Button layoutX="723.0" layoutY="547.0" mnemonicParsing="false" onAction="#onSendButtonClicked" prefHeight="33.0" prefWidth="63.0" text="Send">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Button>
+         </children>
       </Pane>
 
-      <TextField id="searchField" layoutX="-90.0" layoutY="-53.0" promptText="Search for user..." style="-fx-background-color: #888888; -fx-focus-color: #888888; -border-insets: 5px;" text = "search for user..." />
-      <ScrollPane hbarPolicy="NEVER">
+      <TextField id="searchField" layoutX="-90.0" layoutY="-53.0" promptText="Search for user..." style="-fx-background-color: #888888; -fx-focus-color: #888888; -border-insets: 5px;" text="search for user..." />
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="25.0" prefHeight="576.0" prefWidth="201.0">
          <content>
-      <VBox fx:id="activeUsers" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #88a5ad; -fx-focus-color: #88a5ad;">
-         <children>
-            <TextField prefHeight="30.0" prefWidth="200.0" />
-         </children>
-      </VBox>
+            <VBox fx:id="activeUsers" prefHeight="575.0" prefWidth="200.0" style="-fx-background-color: #88a5ad; -fx-focus-color: #88a5ad;">
+                <children>
+                    <TextField prefHeight="30.0" prefWidth="200.0" />
+                </children>
+            </VBox>
          </content>
       </ScrollPane>
    </children>

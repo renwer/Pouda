@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginFormController {
-
     @FXML
     private Button okButton;
     @FXML
@@ -17,9 +16,25 @@ public class LoginFormController {
     @FXML
     private TextField userNameTextField;
 
+    @FXML
+    private TextField ipTextField;
+    @FXML
+    private TextField portTextField;
+
+    private static final String DEFAULT_IP_ADDRESS = "127.0.0.1";
+    private static final int DEFAULT_PORT = 8189;
+
     private Stage dialogStage;
     private String userName;
     private PressedButton command;
+    private String ipAddress;
+    private int port;
+
+    @FXML
+    private void initialize(){
+        ipTextField.setText(DEFAULT_IP_ADDRESS);
+        portTextField.setText(String.valueOf(DEFAULT_PORT));
+    }
 
     public PressedButton getCommand(){
         return command;
@@ -29,6 +44,14 @@ public class LoginFormController {
         return userName;
     }
 
+    public String getIpAddress(){
+        return ipAddress;
+    }
+
+    public int getPort(){
+        return port;
+    }
+
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
     }
@@ -36,8 +59,17 @@ public class LoginFormController {
     @FXML
     private void handleOk(){
         String userName = userNameTextField.getText();
-        if(userName != null && userName.length() != 0){
+        String ipAddress = ipTextField.getText();
+        String port = portTextField.getText();
+
+        if(userName != null && userName.length() != 0 &&
+                ipAddress != null && ipAddress.length() != 0 &&
+                port != null && port.length() != 0){
+
             this.userName = userName;
+            this.ipAddress = ipAddress;
+            this.port = Integer.parseInt(port);
+
             command = PressedButton.OK;
             dialogStage.close();
         }
@@ -50,7 +82,17 @@ public class LoginFormController {
 
     @FXML
     private void handleAnonymous(){
-        command = PressedButton.ANONYMOUS;
-        dialogStage.close();
+        String ipAddress = ipTextField.getText();
+        String port = portTextField.getText();
+
+        if(ipAddress != null && ipAddress.length() != 0 &&
+                port != null && port.length() != 0) {
+
+            this.ipAddress = ipAddress;
+            this.port = Integer.parseInt(port);
+
+            command = PressedButton.ANONYMOUS;
+            dialogStage.close();
+        }
     }
 }

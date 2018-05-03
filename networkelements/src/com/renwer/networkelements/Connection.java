@@ -1,7 +1,5 @@
 package com.renwer.networkelements;
 
-import com.renwer.server.Server;
-
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;

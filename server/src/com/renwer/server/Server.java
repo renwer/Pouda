@@ -1,6 +1,7 @@
 package com.renwer.server;
 import com.renwer.networkelements.Connection;
 import com.renwer.networkelements.ConnectionListener;
+import com.renwer.utils.StringUtils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,17 +10,39 @@ import java.util.StringJoiner;
 
 public class Server implements ConnectionListener {
 
+    private final static String DEFAULT_SERVER_NAME = "Simple_Chat_Server";
+    private final static int DEFAULT_SERVER_PORT = 8189;
+    private String serverName;
+
     public static void main(String[] args) {
-        new Server();
+        if(args.length == 0) {
+            new Server();
+        }else if(args.length == 1){
+            int port = Integer.parseInt(args[0]);
+            new Server(port);
+        }else if(args.length == 2){
+            int port = Integer.parseInt(args[0]);
+            String serverName = args[1];
+            new Server(serverName, port);
+        }
     }
 
     /** All connections */
-    public static ArrayList<Connection> connections = new ArrayList<>();
+    private static ArrayList<Connection> connections = new ArrayList<>();
 
     private Server() {
-        System.out.println("Server up and running");
+        this(DEFAULT_SERVER_NAME, DEFAULT_SERVER_PORT);
+    }
 
-        try (ServerSocket serverSocket = new ServerSocket(8189)) {
+    private Server(int port){
+        this(DEFAULT_SERVER_NAME, port);
+    }
+
+    private Server(String serverName, int port){
+        System.out.println("Server up and running");
+        this.serverName = serverName;
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
                 try {
                     Connection connection = new Connection(this, serverSocket.accept());
@@ -41,22 +64,8 @@ public class Server implements ConnectionListener {
     @Override
     public synchronized void onStringReceived(Connection connection, String string) {
         if(string.startsWith("TYPE:REGISTER")){
-            String userName = string.substring(string.indexOf(':', string.indexOf("USERNAME:")) + 1);
-
-            if (!isUniqueUserName(userName)) {
-                userName = generateUniqueUserName(userName);
-            }
-
-            connection.setUserName(userName);
-            connection.sendString("TYPE:REGISTER USERNAME:" + userName);
-
-            StringJoiner allUsersStringJoiner = new StringJoiner(",");
-            for(Connection c : connections){
-                allUsersStringJoiner.add(c.getUserName());
-            }
-
-            sendToAllConnections("TYPE:USER_LIST USERS:" + allUsersStringJoiner.toString());
-            sendToAllConnections(userName + " joined the chat room");
+            String userName = StringUtils.getParameterFromString(string, "USERNAME");
+            registerNewUser(connection, userName);
         }else {
             sendToAllConnections(connection.getUserName() + ": " + string);
         }
@@ -72,6 +81,23 @@ public class Server implements ConnectionListener {
     public synchronized void onException(Connection connection, Exception e) {
         connection.abortConnection();
         System.out.println("Exception caught " + e);
+    }
+
+    private synchronized void registerNewUser(Connection connection, String userName){
+        if (!isUniqueUserName(userName)) {
+            userName = generateUniqueUserName(userName);
+        }
+
+        connection.setUserName(userName);
+        connection.sendString("TYPE:REGISTER SERVERNAME:" + serverName + " USERNAME:" + userName);
+
+        StringJoiner allUsersStringJoiner = new StringJoiner(",");
+        for(Connection c : connections){
+            allUsersStringJoiner.add(c.getUserName());
+        }
+
+        sendToAllConnections("TYPE:USER_LIST USERS:" + allUsersStringJoiner.toString());
+        sendToAllConnections(userName + " joined the chat room");
     }
 
     private synchronized void sendToAllConnections(String message) {
